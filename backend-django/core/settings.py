@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'authentication',
+
+    'study_module',
 ]
 
 MIDDLEWARE = [
