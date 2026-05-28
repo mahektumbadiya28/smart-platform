@@ -1,27 +1,134 @@
 import { useNavigate } from "react-router-dom";
+import {
+  motion
+} from "framer-motion";
+import {
+  useContext
+} from "react";
 
-function Navbar() {
+import {
+  ThemeContext
+} from "../context/ThemeContext";
+
+import {
+  FaBars
+} from "react-icons/fa";
+
+function Navbar({
+  setSidebarOpen
+}) {
+
   const navigate = useNavigate();
 
+  const {
+    darkMode,
+    setDarkMode
+  } = useContext(ThemeContext);
+
   const handleLogout = () => {
+
     localStorage.removeItem("token");
+
     navigate("/");
   };
 
   return (
-    <div className="flex justify-between items-center bg-slate-800/60 backdrop-blur px-6 py-4 rounded-2xl border border-slate-700 shadow-lg">
-      <div>
-        <h2 className="text-xl font-bold text-white">Dashboard 🚀</h2>
-        <p className="text-xs text-slate-400 mt-0.5">Welcome back!</p>
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -50
+      }}
+
+      animate={{
+        opacity: 1,
+        y: 0
+      }}
+
+      transition={{
+        duration: 0.5
+      }}
+      className="
+      flex
+      justify-between
+      items-center
+
+      p-5
+      rounded-xl
+      shadow-lg
+
+      bg-white
+      dark:bg-slate-800
+
+      text-black
+      dark:text-white
+    ">
+
+      <div className="flex items-center gap-4">
+
+        {/* Mobile Menu Button */}
+
+        <motion.button
+          className="lg:hidden"
+          onClick={() =>
+            setSidebarOpen(true)
+          }
+        >
+          <FaBars size={22} />
+        </motion.button>
+
+        <h2 className="text-2xl font-bold">
+          Dashboard 🚀
+        </h2>
+
       </div>
 
-      <button
-        onClick={handleLogout}
-        className="bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-white font-semibold px-5 py-2 rounded-xl text-sm transition-all duration-200 shadow-lg shadow-cyan-500/20"
-      >
-        Logout
-      </button>
-    </div>
+      <div className="flex gap-4">
+
+        <motion.button
+          onClick={() =>
+            setDarkMode(!darkMode)
+          }
+          className="
+            px-4
+            py-2
+            rounded-lg
+
+            bg-slate-200
+            dark:bg-slate-700
+          "
+        >
+          {
+            darkMode
+              ? "☀️"
+              : "🌙"
+          }
+        </motion.button>
+
+        <motion.button
+
+          whileHover={{
+            scale: 1.05
+          }}
+
+          whileTap={{
+            scale: 0.95
+          }}
+          onClick={handleLogout}
+          className="
+            bg-cyan-500
+            hover:bg-cyan-600
+
+            px-5
+            py-2
+            rounded-lg
+          "
+        >
+          Logout
+        </motion.button>
+
+      </div>
+
+    </motion.div>
   );
 }
 

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import {
+    toast
+} from "react-toastify";
 
 function StudyHelper() {
     const token = localStorage.getItem("token");
@@ -61,11 +64,11 @@ function StudyHelper() {
                 },
             });
             setSummary(response.data.summary);
-            alert("PDF Uploaded & AI Summary Generated 🚀");
+            toast.success("PDF Uploaded & AI Summary Generated 🚀");
             fetchNotes();
         } catch (error) {
             console.log(error);
-            alert("Failed to upload PDF");
+            toast.error("Failed to upload PDF");
         }
     };
 
@@ -214,8 +217,8 @@ function StudyHelper() {
                                                 <div
                                                     key={idx}
                                                     className={`px-4 py-2 rounded-xl text-sm border transition-colors ${opt === q.answer
-                                                            ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300"
-                                                            : "bg-slate-900 border-slate-700 text-slate-300"
+                                                        ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300"
+                                                        : "bg-slate-900 border-slate-700 text-slate-300"
                                                         }`}
                                                 >
                                                     {String.fromCharCode(65 + idx)}. {opt}

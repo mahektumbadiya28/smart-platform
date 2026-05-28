@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import { toast } from "react-toastify";
 
 const CATEGORIES = ["Food", "Travel", "Shopping", "Education", "Other"];
 
@@ -49,7 +50,7 @@ function ExpenseTracker() {
     }, []);
 
     const addExpense = async () => {
-        if (!title || !amount) return alert("Please fill all fields");
+        if (!title || !amount) return toast.warning("Please fill all fields");
         setLoading(true);
         try {
             await API.post(
@@ -62,7 +63,7 @@ function ExpenseTracker() {
             await Promise.all([fetchExpenses(), fetchAnalytics()]);
         } catch (error) {
             console.log(error);
-            alert("Failed to add expense");
+            toast.error("Failed to add expense");
         } finally {
             setLoading(false);
         }

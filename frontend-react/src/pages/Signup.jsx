@@ -1,6 +1,9 @@
 import { useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import {
+  toast
+} from "react-toastify";
 
 function Signup() {
   const navigate = useNavigate();
@@ -21,10 +24,10 @@ function Signup() {
     setLoading(true);
     try {
       await API.post("/auth/register/", formData);
-      alert("Account created! 🎉");
+      toast.success("Account created! 🎉");
       navigate("/");
     } catch (error) {
-      alert("Signup Failed ❌");
+      toast.error("Signup Failed ❌");
     } finally {
       setLoading(false);
     }

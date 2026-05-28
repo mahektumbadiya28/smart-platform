@@ -1,6 +1,9 @@
 import { useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import {
+  toast
+} from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,9 +24,10 @@ function Login() {
     try {
       const response = await API.post("/auth/login/", formData);
       localStorage.setItem("token", response.data.access);
+      toast.success("Login Successful 🚀");
       navigate("/dashboard");
     } catch (error) {
-      alert("Invalid Credentials ❌");
+      toast.error("Invalid Credentials ❌");
     } finally {
       setLoading(false);
     }
