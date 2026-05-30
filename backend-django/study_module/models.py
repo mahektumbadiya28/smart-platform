@@ -78,3 +78,108 @@ class Expense(models.Model):
 
     def __str__(self):
         return self.title
+
+class Profile(models.Model):
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    full_name = models.CharField(
+        max_length=200
+    )
+
+    bio = models.TextField(
+        blank=True
+    )
+
+    college = models.CharField(
+        max_length=200,
+        blank=True
+    )
+
+    skills = models.TextField(
+        blank=True
+    )
+
+    profile_image = models.URLField(
+        blank=True
+    )
+
+    def __str__(self):
+        return self.user.username
+
+class StudyRecommendation(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    recommendation = models.TextField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return self.user.username
+
+class StudySchedule(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    description = models.TextField()
+
+    study_date = models.DateField()
+
+    start_time = models.TimeField()
+
+    end_time = models.TimeField()
+
+    completed = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return self.title
+
+class StudySession(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    start_time = models.DateTimeField()
+
+    end_time = models.DateTimeField()
+
+    duration = models.DurationField()
+
+    completed = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return f"Session - {self.start_time}"   
+

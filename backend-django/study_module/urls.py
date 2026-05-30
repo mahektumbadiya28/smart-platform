@@ -9,6 +9,14 @@ from .views import (
     add_expense,
     get_expenses,
     expense_analytics,
+    get_profile,
+    update_profile,
+    ai_chat,
+    generate_recommendation,
+    get_recommendations,
+    get_schedules,
+    generate_schedule,
+    complete_schedule,
 )
 
 urlpatterns = [
@@ -25,4 +33,13 @@ urlpatterns = [
     path('expense/add/', add_expense),
     path('expense/all/', get_expenses),
     path('expense/analytics/', expense_analytics),
+    path('profile/', get_profile),
+    path('profile/update/', update_profile),
+    path('ai-chat/', ai_chat),
+    path('recommendations/generate/',generate_recommendation),
+    path('recommendations/',get_recommendations),
+    path('schedules/',get_schedules),
+
+path('schedules/generate/',generate_schedule),
+path('schedules/complete/<int:id>/',complete_schedule),
 ]
