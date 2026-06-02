@@ -29,12 +29,6 @@ function Recommendations() {
         setLoading
     ] = useState(false);
 
-    useEffect(() => {
-
-        fetchRecommendations();
-
-    }, []);
-
     const fetchRecommendations = async () => {
 
         try {
@@ -54,11 +48,17 @@ function Recommendations() {
                 response.data
             );
 
-        } catch (error) {
+        } catch {
 
-            console.log(error);
+            console.log("error");
         }
     };
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        fetchRecommendations();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const generateAIRecommendation = async () => {
 
@@ -90,7 +90,7 @@ function Recommendations() {
                 "AI Recommendations Generated 🧠"
             );
 
-        } catch (error) {
+        } catch {
 
             toast.error(
                 "Generation Failed ❌"

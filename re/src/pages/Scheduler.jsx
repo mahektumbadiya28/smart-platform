@@ -29,12 +29,6 @@ function Scheduler() {
         setLoading
     ] = useState(false);
 
-    useEffect(() => {
-
-        fetchSchedules();
-
-    }, []);
-
     const fetchSchedules = async () => {
 
         try {
@@ -52,11 +46,17 @@ function Scheduler() {
 
             setSchedules(response.data);
 
-        } catch (error) {
+        } catch {
 
-            console.log(error);
+            console.log("error");
         }
     };
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        fetchSchedules();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const generateAISchedule = async () => {
 
@@ -88,7 +88,7 @@ function Scheduler() {
                 "AI Schedule Generated 📅"
             );
 
-        } catch (error) {
+        } catch {
 
             toast.error(
                 "Generation Failed ❌"
@@ -134,7 +134,7 @@ function Scheduler() {
                 "Task Completed ✅"
             );
 
-        } catch (error) {
+        } catch {
 
             toast.error(
                 "Update Failed ❌"

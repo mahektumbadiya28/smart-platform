@@ -71,10 +71,10 @@ function AIChat() {
 
             setMessage("");
 
-        } catch (error) {
+        } catch {
 
             toast.error(
-                "AI Error ❌"
+                "Error ❌"
             );
         }
 
